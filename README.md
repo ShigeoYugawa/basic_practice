@@ -1,6 +1,5 @@
-# 基礎学習テンプレート
-
----
+# Django 基礎学習テンプレート
+<br><br>
 
 ## 概要
 Djangoの機能学習用スターターキット。
@@ -12,10 +11,7 @@ CusutomUserは実装済。後からユーザーにカスタムフィールドや
 - Python 3.12.3
 - Django 5.2.6
 
----
-
-## インストール方法（git cloneから再現する方法）
-
+<br><br>
 ---
 
 ## イチから構築する方法
@@ -81,7 +77,8 @@ $ source .venv/bin/activate
 ```bash
 (.venv)$ python manage.py createsuperuser
 メールアドレス: #ここで管理者のメールアドレスを入力
-パスワード(again):
+Password:
+Password(again):
 Superuser created successfully.
 (.venv)$
 ```
@@ -136,6 +133,95 @@ user1@example.com True False
 
 [settings](https://github.com/ShigeoYugawa/basic_practice/blob/main/basic_practice/settings.py#L122)
 
+- basic_practice/settings.py - 日本語対応させる
+
+[settings](https://github.com/ShigeoYugawa/basic_practice/blob/main/basic_practice/settings.py#L106)
+
+
+### 管理画面にアクセスして登録ユーザーを確認する
+開発サーバーを起動
+```bash
+(.venv)$ python manage.py runserver
+```
+
+下記URLへアクセスして管理者メールアドレスとパスワードで管理画面へログインする
+```bash
+http://localhost:8000/admin
+```
+
+<br><br>
+---
+
+## git cloneからプロジェクトを再現する方法
+
+### 開発ディレクトリの準備
+```bash
+$ touch basic_practice
+$ cd basic_practice
+```
+
+### リポジトリをクローン
+```bash
+$ git clone https://github.com/ShigeoYugawa/basic_practice.git
+```
+
+### 仮想環境の準備
+```bash
+$ python3 -m venv .venv # 環境によっては python -m venv .venv
+$ source .venv/bin/activate
+(.venv)$
+```
+
+### 依存パッケージをインストール
+```bash
+(.venv)$ pip install --upgrade pip
+(.venv)$ pip install -r requirements.txt
+```
+
+### マイグレーションを実行
+```bash
+(.venv)$ python manage.py migrate
+```
+
+### 管理者ユーザーを追加する
+```bash
+(.venv)$ python manage.py createsuperuser
+メールアドレス: #ここで管理者のメールアドレスを入力
+Password:
+Password(again):
+Superuser created successfully.
+(.venv)$
+```
+
+### Django Shell でユーザー追加
+```bash
+(.venv)$ python manage.py shell
+
+Ctrl click to launch VS Code Native REPL
+Python 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+>>> from accounts.models import CustomUser
+>>> user = CustomUser.objects.create_user(
+...     email="user1@example.com",
+...     password="testpass123",
+...     is_active=True)
+>>>
+>>> print(user)
+user1@example.com
+>>>
+>>> users = CustomUser.objects.all()
+>>> for user in users:
+...     print(user.email, user.is_active, user.is_staff)
+... 
+admin@example.com True True
+user1@example.com True False
+>>>
+>>> exit()
+(.venv)$
+
+```
 
 ### 管理画面にアクセスして登録ユーザーを確認する
 開発サーバーを起動
