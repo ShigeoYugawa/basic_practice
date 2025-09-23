@@ -55,10 +55,10 @@ $ source .venv/bin/activate
 ブラウザで http://127.0.0.1:8000/ にアクセスして Django のウェルカムページが表示されればOK。
 
 ### CustomUser を作成する
-ここにコードへのリンクを追加
+[class CustomUser](https://github.com/ShigeoYugawa/basic_practice/blob/main/accounts/models.py#L40)
 
 ### CustomUserManager を作成する
-ここにコードへのリンクを追加
+[class CustomUserManager](https://github.com/ShigeoYugawa/basic_practice/blob/main/accounts/models.py#L16)
 
 ### マイグレーションを実行する
 必ずカスタムユーザーを使ってアプリ開発できるように真っ先にマイグレーションを実行しておく
