@@ -149,6 +149,40 @@ user1@example.com True False
 http://localhost:8000/admin
 ```
 
+### ダミーのビュー、ルーティング、フォーム、テストを追加する
+
+#### ビューの追加
+```bash
+(.venv)$ touch accounts/views.py
+```
+[accounts/views.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/accounts/views.py#L9)
+
+#### ルーティングの追加
+```bash
+(.venv)$ touch accounts/urls.py
+```
+[accounts/urls.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/accounts/urls.py#L10)
+
+[basic_practice/urls.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/basic_practice/urls.py#L20)
+
+#### フォームの追加
+```bash
+(.venv)$ touch accounts/forms.py
+```
+[accounts/urls.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/accounts/forms.py#L9)
+
+#### テストの追加
+```bash
+(.venv)$ mkdir -p tests/accounts
+(.venv)$ touch tests/accounts/teset_accounts_views.py
+(.venv)$ touch tests/accounts/teset_accounts_forms.py
+```
+[teset_accounts_views.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/tests/accounts/test_accounts_views.py#L10)
+
+[teset_accounts_forms.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/tests/accounts/test_accounts_forms.py#L11)
+
+
+
 <br><br>
 ---
 
