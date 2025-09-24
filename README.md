@@ -126,6 +126,8 @@ http://localhost:8000/admin
 
 ## イチから構築する方法
 
+この手順は備忘録として作成しています。
+
 ### 開発ディレクトリの準備
 ```bash
 $ touch basic_practice
