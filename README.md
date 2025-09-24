@@ -301,6 +301,33 @@ http://localhost:8000/admin
 [teset_accounts_forms.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/tests/accounts/test_accounts_forms.py#L11)
 
 
+#### テストの実行
+
+```bash
+(.venv)$ pytest -v
+================================== test session starts ===================================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0 -- /path/to/basic_practice/.venv/bin/python3
+cachedir: .pytest_cache
+django: version: 5.2.6, settings: basic_practice.settings (from ini)
+rootdir: /path/to/basic_practice
+configfile: pytest.ini
+plugins: django-4.11.1
+collected 8 items                                                                        
+
+tests/accounts/test_accounts_forms.py::test_dummy_user_form_valid PASSED           [ 12%]
+tests/accounts/test_accounts_forms.py::test_dummy_user_form_invalid PASSED         [ 25%]
+tests/accounts/test_accounts_views.py::test_dummy_fbv PASSED                       [ 37%]
+tests/accounts/test_accounts_views.py::test_dummy_cbv PASSED                       [ 50%]
+tests/accounts/test_accounts_views.py::test_create_user_with_manager PASSED        [ 62%]
+tests/accounts/test_accounts_views.py::test_create_superuser_with_manager PASSED   [ 75%]
+tests/accounts/test_accounts_forms.py::test_dummy_form_valid PASSED                [ 87%]
+tests/accounts/test_accounts_forms.py::test_dummy_form_invalid PASSED              [100%]
+
+=================================== 8 passed in 2.04s ====================================
+(.venv)$ 
+
+
+```
 
 <br><br>
 
