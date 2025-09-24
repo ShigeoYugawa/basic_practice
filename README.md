@@ -331,6 +331,28 @@ tests/accounts/test_accounts_forms.py::test_dummy_form_invalid PASSED           
 
 ```
 
+#### ブラウザでビューの動作を確認
+```bash
+(.venv)$ # 開発サーバーを起動
+(.venv)$ python manage.py runserver
+```
+
+##### 関数ベースビューにアクセス
+http://localhost:8000/accounts/dummy_fbv/
+
+ブラウザに表示される内容
+```bash
+Hello Django from FBV!
+```
+
+##### クラスベースビューにアクセス
+http://localhost:8000/accounts/dummy_cbv/
+
+ブラウザに表示される内容
+```bash
+Hello Django from CBV!
+```
+
 <br><br>
 
 ---
