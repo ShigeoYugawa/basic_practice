@@ -1,5 +1,6 @@
 # Django 基礎学習テンプレート
-<br><br>
+
+<br>
 
 ## 概要
 Djangoの機能学習用スターターキット。
@@ -11,7 +12,116 @@ CusutomUserは実装済。後からユーザーにカスタムフィールドや
 - Python 3.12.3
 - Django 5.2.6
 
+---
+
+## 前提条件
+
+このリポジトリは **学習用スターターキット** として作成されています。  
+対象読者は以下の前提を満たしていることを想定しています。
+
+- Linux または WSL での開発環境が準備できている  
+- Python と pip の基本操作を理解している  
+- GitHub からリポジトリを clone できる  
+- ターミナルでコマンドを実行できる  
+
+👉 上記に不安がある方は、まず Linux / Python / Git の基礎を学習してから取り組むことを推奨します。
+
+<br>
+
+---
+
+## git cloneからプロジェクトを再現する方法
+
+### 開発ディレクトリの準備
+```bash
+$ touch basic_practice
+$ cd basic_practice
+```
+
+### リポジトリをクローン
+```bash
+$ git clone https://github.com/ShigeoYugawa/basic_practice.git
+```
+
+### 仮想環境の準備
+```bash
+$ python3 -m venv .venv # 環境によっては python -m venv .venv
+$ source .venv/bin/activate
+(.venv)$
+```
+
+### 依存パッケージをインストール
+```bash
+(.venv)$ # 各種ツールの最新版をインストールできるようにpipをアップデートする
+(.venv)$ pip install --upgrade pip 
+(.venv)$ # プロジェクトで使用しているバージョンのツールをインストールする
+(.venv)$ pip install -r requirements.txt 
+```
+
+### マイグレーションを実行
+```bash
+(.venv)$ # DBにモデルに対応したテーブルを作成する
+(.venv)$ python manage.py migrate 
+```
+
+### 管理者ユーザーを追加する
+```bash
+(.venv)$ python manage.py createsuperuser
+メールアドレス: #ここで管理者のメールアドレスを入力
+Password:
+Password(again):
+Superuser created successfully.
+(.venv)$
+```
+
+### Django Shell でユーザー追加
+```bash
+(.venv)$ # Djangoシェルを使ってインタラクティブに操作する
+(.venv)$ python manage.py shell 
+
+Ctrl click to launch VS Code Native REPL
+Python 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+>>> # カスタムユーザーモデルをインポート
+>>> from accounts.models import CustomUser
+>>>
+>>> # ユーザーを１つ作成する
+>>> user = CustomUser.objects.create_user(
+...     email="user1@example.com",
+...     password="testpass123",
+...     is_active=True)
+>>>
+>>> # 現在インスタンス化しているユーザーを呼び出す
+>>> print(user)
+user1@example.com
+>>>
+>>> # カスタムユーザーをすべて呼び出す
+>>> users = CustomUser.objects.all()
+>>> for user in users:
+...     print(user.email, user.is_active, user.is_staff)
+... 
+admin@example.com True True
+user1@example.com True False
+>>>
+>>> exit()
+(.venv)$
+
+```
+
+### 管理画面にアクセスして登録ユーザーを確認する
+開発サーバーを起動
+```bash
+(.venv)$ python manage.py runserver
+```
+
+下記URLへアクセスして管理者メールアドレスとパスワードで管理画面へログインする
+```bash
+http://localhost:8000/admin
+```
 <br><br>
+
 ---
 
 ## イチから構築する方法
@@ -31,6 +141,7 @@ $ source .venv/bin/activate
 
 ### pip をアップデート
 ```bash
+(.venv)$ # 各種ツールの最新版をインストールできるようにpipをアップデートする
 (.venv)$ pip install --upgrade pip
 ```
 
@@ -53,16 +164,16 @@ $ source .venv/bin/activate
 ### CustomUser を作成する
 
 ```bash
-(.venv)$ touch accounts/views.py
+(.venv)$ touch accounts/models.py
 ```
 
-- accounts/views.py
+- accounts/models.py
 
 [class CustomUser](https://github.com/ShigeoYugawa/basic_practice/blob/main/accounts/models.py#L40)
 
 ### CustomUserManager を作成する
 
-- accounts/views.py
+- accounts/models.py
 
 [class CustomUserManager](https://github.com/ShigeoYugawa/basic_practice/blob/main/accounts/models.py#L16)
 
@@ -85,22 +196,28 @@ Superuser created successfully.
 
 ### Django Shell でユーザー追加
 ```bash
-(.venv)$ python manage.py shell
+(.venv)$ # Djangoシェルを使ってインタラクティブに操作する
+(.venv)$ python manage.py shell 
 
 Ctrl click to launch VS Code Native REPL
 Python 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 (InteractiveConsole)
 >>> 
+>>> # カスタムユーザーモデルをインポート
 >>> from accounts.models import CustomUser
+>>>
+>>> # ユーザーを１つ作成する
 >>> user = CustomUser.objects.create_user(
 ...     email="user1@example.com",
 ...     password="testpass123",
 ...     is_active=True)
 >>>
+>>> # 現在インスタンス化しているユーザーを呼び出す
 >>> print(user)
 user1@example.com
 >>>
+>>> # カスタムユーザーをすべて呼び出す
 >>> users = CustomUser.objects.all()
 >>> for user in users:
 ...     print(user.email, user.is_active, user.is_staff)
@@ -184,89 +301,6 @@ http://localhost:8000/admin
 
 
 <br><br>
----
-
-## git cloneからプロジェクトを再現する方法
-
-### 開発ディレクトリの準備
-```bash
-$ touch basic_practice
-$ cd basic_practice
-```
-
-### リポジトリをクローン
-```bash
-$ git clone https://github.com/ShigeoYugawa/basic_practice.git
-```
-
-### 仮想環境の準備
-```bash
-$ python3 -m venv .venv # 環境によっては python -m venv .venv
-$ source .venv/bin/activate
-(.venv)$
-```
-
-### 依存パッケージをインストール
-```bash
-(.venv)$ pip install --upgrade pip
-(.venv)$ pip install -r requirements.txt
-```
-
-### マイグレーションを実行
-```bash
-(.venv)$ python manage.py migrate
-```
-
-### 管理者ユーザーを追加する
-```bash
-(.venv)$ python manage.py createsuperuser
-メールアドレス: #ここで管理者のメールアドレスを入力
-Password:
-Password(again):
-Superuser created successfully.
-(.venv)$
-```
-
-### Django Shell でユーザー追加
-```bash
-(.venv)$ python manage.py shell
-
-Ctrl click to launch VS Code Native REPL
-Python 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
-(InteractiveConsole)
->>> 
->>> from accounts.models import CustomUser
->>> user = CustomUser.objects.create_user(
-...     email="user1@example.com",
-...     password="testpass123",
-...     is_active=True)
->>>
->>> print(user)
-user1@example.com
->>>
->>> users = CustomUser.objects.all()
->>> for user in users:
-...     print(user.email, user.is_active, user.is_staff)
-... 
-admin@example.com True True
-user1@example.com True False
->>>
->>> exit()
-(.venv)$
-
-```
-
-### 管理画面にアクセスして登録ユーザーを確認する
-開発サーバーを起動
-```bash
-(.venv)$ python manage.py runserver
-```
-
-下記URLへアクセスして管理者メールアドレスとパスワードで管理画面へログインする
-```bash
-http://localhost:8000/admin
-```
 
 ---
 
