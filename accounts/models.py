@@ -44,6 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     Attributes:
         email (str): ログインで使用するメールアドレス
+        nickname (str): 表示用ニックネーム
         is_active (bool): アカウント有効判定　パスワード認証未設置段階では常にTrue
         is_staff (bool): 管理画面での操作権限
         USERNAME_FIELD (str): 認証に使用するフィールド（email）
@@ -51,6 +52,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
 
     email = models.EmailField(verbose_name="メールアドレス", unique=True)
+    nickname = models.CharField(verbose_name="ニックネーム", max_length=50, blank=True, null=True)
     password = models.CharField(verbose_name="パスワード", max_length=128)
     is_active = models.BooleanField(verbose_name="アカウントの有効性", default=False)
     is_staff = models.BooleanField(verbose_name="アカウントの管理画面アクセス権限", default=False)
@@ -63,3 +65,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "ユーザー"
         verbose_name_plural = "ユーザー一覧"
+
+    def __str__(self):
+        if self.nickname:
+            return self.nickname
+        return self.email
