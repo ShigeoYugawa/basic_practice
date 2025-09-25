@@ -70,3 +70,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         if self.nickname:
             return self.nickname
         return self.email
+    
+    def get_display_name(self):
+        return self.nickname or self.email
