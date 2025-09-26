@@ -3,7 +3,11 @@
 """
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    UserCreationForm,
+    UserChangeForm,
+)
 from .models import CustomUser
 
 
@@ -21,12 +25,19 @@ class DummyUserForm(forms.ModelForm):
 
 
 class CustomUserCreationForm(UserCreationForm):
+    """サインアップ用"""
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = ("email", "nickname")
 
 
 class CustomUserChangeForm(UserChangeForm):
+    """ユーザー更新用（プロフィール編集など）"""
     class Meta:
         model = CustomUser
         fields = ("email", "nickname")
+
+
+class CustomLoginForm(AuthenticationForm):
+    """ログイン用"""
+    username = forms.EmailField(label="Email")  # CustomUser の USERNAME_FIELD が email のため
