@@ -147,8 +147,38 @@ tests/accounts/test_accounts_forms.py::test_dummy_form_valid PASSED             
 tests/accounts/test_accounts_forms.py::test_dummy_form_invalid PASSED                     [100%]
 
 ======================================= 9 passed in 3.21s =======================================
-(.venv)$ 
+(.venv)$
 ```
+
+#### ブラウザでビューの動作を確認
+```bash
+(.venv)$ # 開発サーバーを起動
+(.venv)$ python manage.py runserver
+```
+
+##### 関数ベースビューにアクセス
+http://localhost:8000/accounts/dummy_fbv/
+
+ブラウザに表示される内容
+```bash
+Hello Django from FBV!
+```
+
+##### クラスベースビューにアクセス
+http://localhost:8000/accounts/dummy_cbv/
+
+ブラウザに表示される内容
+```bash
+Hello Django from CBV!
+```
+
+##### ユーザー登録、ログアウト、ログインを確認する
+`http://localhost:8000/`
+
+ヘッダにあるSignupからユーザー登録画面へ移動する。
+メールアドレス、パスワードでユーザー登録した後、ログアウトして、再度ログイン動作を実行してみる。
+ユーザー登録後およびログイン後はWelcomeページに遷移する。ログアウトするとホーム画面に遷移する。
+
 
 <br><br>
 
