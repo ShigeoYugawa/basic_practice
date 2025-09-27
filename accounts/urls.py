@@ -4,7 +4,7 @@
 
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import dummy_fbv, DummyCBV, signup_view, CustomLoginView, CustomLogoutView, welcome_view
+from .views import dummy_fbv, DummyCBV, registration_view, CustomLoginView, CustomLogoutView, welcome_view
 
 
 app_name = "accounts"
@@ -16,7 +16,7 @@ urlpatterns = [
     path("welcome/", welcome_view, name="welcome_view"),
 
     # サインアップ
-    path("signup/", signup_view, name="signup"),
+    path("register/", registration_view, name="registration"),
 
     # ログイン（Django標準ビューを利用）
     path("login/", CustomLoginView.as_view(), name="login"),

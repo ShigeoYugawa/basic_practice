@@ -23,7 +23,7 @@ class DummyCBV(View):
         return HttpResponse("Hello Django from CBV!")
     
 
-def signup_view(request):
+def registration_view(request):
     """ユーザー登録（サインアップ）"""
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -38,11 +38,15 @@ def signup_view(request):
                 password=raw_password)
             if user is not None:
                 login(request, user)
-            return redirect("accounts:welcome_view")
+                return redirect("accounts:welcome_view")
+            else:
+                # 認証失敗時の処理（通常は起こらない想定だが明示しておく）
+                form.add_error(None, "ログイン処理に失敗しました。管理者にお問い合わせください。") 
+        # form.is_valid() が False の場合もここに落ちる  
     else:
         form = CustomUserCreationForm()
     
-    return render(request, "accounts/signup.html", {"form": form})
+    return render(request, "accounts/registration.html", {"form": form})
 
 
 class CustomLoginView(LoginView):
