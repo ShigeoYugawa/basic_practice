@@ -111,7 +111,9 @@ user1@example.com True False
 ```
 
 ### 管理画面にアクセスして登録ユーザーを確認する
-開発サーバーを起動
+
+#### 開発サーバーを起動
+
 ```bash
 (.venv)$ python manage.py runserver
 ```
@@ -120,6 +122,34 @@ user1@example.com True False
 ```bash
 http://localhost:8000/admin
 ```
+
+#### テストの実行
+
+```bash
+(.venv)$ pytest -v
+====================================== test session starts ======================================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0 -- /path/to/basic_practice/.venv/bin/python3
+cachedir: .pytest_cache
+django: version: 5.2.6, settings: basic_practice.settings (from ini)
+rootdir: /path/to/basic_practice
+configfile: pytest.ini
+plugins: django-4.11.1
+collected 9 items                                                                               
+
+tests/accounts/test_accounts_forms.py::test_dummy_user_form_valid PASSED                  [ 11%]
+tests/accounts/test_accounts_forms.py::test_dummy_user_form_invalid PASSED                [ 22%]
+tests/accounts/test_accounts_views.py::test_dummy_fbv PASSED                              [ 33%]
+tests/accounts/test_accounts_views.py::test_dummy_cbv PASSED                              [ 44%]
+tests/accounts/test_accounts_views.py::test_create_user_with_manager PASSED               [ 55%]
+tests/accounts/test_accounts_views.py::test_create_superuser_with_manager PASSED          [ 66%]
+tests/accounts/test_auth_flow.py::test_registration_login_logout_flow PASSED              [ 77%]
+tests/accounts/test_accounts_forms.py::test_dummy_form_valid PASSED                       [ 88%]
+tests/accounts/test_accounts_forms.py::test_dummy_form_invalid PASSED                     [100%]
+
+======================================= 9 passed in 3.21s =======================================
+(.venv)$ 
+```
+
 <br><br>
 
 ---
@@ -234,7 +264,7 @@ user1@example.com True False
 
 ### Django 管理画面で編集CustomUserを表示できるようにする
 
-下記モジュールを追加する
+#### 下記モジュールを追加する
 - accounts/apps.py - 管理画面内のアプリ名を日本語に変換する
 - accounts/admin.py - 管理画面にカスタムユーザーを表示させる
 ```bash
@@ -258,12 +288,12 @@ user1@example.com True False
 
 
 ### 管理画面にアクセスして登録ユーザーを確認する
-開発サーバーを起動
+#### 開発サーバーを起動
 ```bash
 (.venv)$ python manage.py runserver
 ```
 
-下記URLへアクセスして管理者メールアドレスとパスワードで管理画面へログインする
+#### 下記URLへアクセスして管理者メールアドレスとパスワードで管理画面へログインする
 ```bash
 http://localhost:8000/admin
 ```
@@ -295,37 +325,40 @@ http://localhost:8000/admin
 #### テストの追加
 ```bash
 (.venv)$ mkdir -p tests/accounts
-(.venv)$ touch tests/accounts/teset_accounts_views.py
-(.venv)$ touch tests/accounts/teset_accounts_forms.py
+(.venv)$ touch tests/accounts/test_accounts_views.py
+(.venv)$ touch tests/accounts/test_accounts_forms.py
+(.venv)$ touch tests/accounts/test_auth_flow.py
 ```
-[teset_accounts_views.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/tests/accounts/test_accounts_views.py#L10)
+[test_accounts_views.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/tests/accounts/test_accounts_views.py#L10)
 
-[teset_accounts_forms.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/tests/accounts/test_accounts_forms.py#L11)
+[test_accounts_forms.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/tests/accounts/test_accounts_forms.py#L11)
 
+[test_auth_flow.py](https://github.com/ShigeoYugawa/basic_practice/blob/main/tests/accounts/test_auth_flow.py#L8)
 
 #### テストの実行
 
 ```bash
 (.venv)$ pytest -v
-================================== test session starts ===================================
+====================================== test session starts ======================================
 platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0 -- /path/to/basic_practice/.venv/bin/python3
 cachedir: .pytest_cache
 django: version: 5.2.6, settings: basic_practice.settings (from ini)
 rootdir: /path/to/basic_practice
 configfile: pytest.ini
 plugins: django-4.11.1
-collected 8 items                                                                        
+collected 9 items                                                                               
 
-tests/accounts/test_accounts_forms.py::test_dummy_user_form_valid PASSED           [ 12%]
-tests/accounts/test_accounts_forms.py::test_dummy_user_form_invalid PASSED         [ 25%]
-tests/accounts/test_accounts_views.py::test_dummy_fbv PASSED                       [ 37%]
-tests/accounts/test_accounts_views.py::test_dummy_cbv PASSED                       [ 50%]
-tests/accounts/test_accounts_views.py::test_create_user_with_manager PASSED        [ 62%]
-tests/accounts/test_accounts_views.py::test_create_superuser_with_manager PASSED   [ 75%]
-tests/accounts/test_accounts_forms.py::test_dummy_form_valid PASSED                [ 87%]
-tests/accounts/test_accounts_forms.py::test_dummy_form_invalid PASSED              [100%]
+tests/accounts/test_accounts_forms.py::test_dummy_user_form_valid PASSED                  [ 11%]
+tests/accounts/test_accounts_forms.py::test_dummy_user_form_invalid PASSED                [ 22%]
+tests/accounts/test_accounts_views.py::test_dummy_fbv PASSED                              [ 33%]
+tests/accounts/test_accounts_views.py::test_dummy_cbv PASSED                              [ 44%]
+tests/accounts/test_accounts_views.py::test_create_user_with_manager PASSED               [ 55%]
+tests/accounts/test_accounts_views.py::test_create_superuser_with_manager PASSED          [ 66%]
+tests/accounts/test_auth_flow.py::test_registration_login_logout_flow PASSED              [ 77%]
+tests/accounts/test_accounts_forms.py::test_dummy_form_valid PASSED                       [ 88%]
+tests/accounts/test_accounts_forms.py::test_dummy_form_invalid PASSED                     [100%]
 
-=================================== 8 passed in 2.04s ====================================
+======================================= 9 passed in 3.21s =======================================
 (.venv)$ 
 
 
@@ -352,6 +385,14 @@ http://localhost:8000/accounts/dummy_cbv/
 ```bash
 Hello Django from CBV!
 ```
+
+##### ユーザー登録、ログアウト、ログインを確認する
+http://localhost:8000/
+
+ヘッダにあるSignupからユーザー登録画面へ移動する。
+メールアドレス、パスワードでユーザー登録した後、ログアウトして、再度ログイン動作を実行してみる。
+ユーザー登録後およびログイン後はWelcomeページに遷移する。ログアウトするとホーム画面に遷移する。
+
 
 <br><br>
 
