@@ -54,7 +54,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name="メールアドレス", unique=True)
     nickname = models.CharField(verbose_name="ニックネーム", max_length=50, blank=True, null=True)
     password = models.CharField(verbose_name="パスワード", max_length=128)
-    is_active = models.BooleanField(verbose_name="アカウントの有効性", default=False)
+    is_active = models.BooleanField(verbose_name="アカウントの有効性", default=True)
     is_staff = models.BooleanField(verbose_name="アカウントの管理画面アクセス権限", default=False)
 
     objects = CustomUserManager() # emailでユーザー作成するために必要。

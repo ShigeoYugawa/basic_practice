@@ -10,7 +10,10 @@
             <a href="{% url 'home' %}">Home</a> |
             {% if user.is_authenticated %}
                 ようこそ {{ user.get_display_name }} さん |
-                <a href="{% url 'accounts:logout' %}">Logout</a>
+                <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
             {% else %}
                 <a href="{% url 'accounts:login' %}">Login</a> | 
                 <a href="{% url 'accounts:signup' %}">Sign Up</a>

@@ -55,7 +55,7 @@ ROOT_URLCONF = 'basic_practice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,13 +119,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # ログイン成功後の遷移先（デフォルトは /accounts/profile/）
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "accounts:welcome_view"
 
 # ログアウト後の遷移先
-LOGOUT_REDIRECT_URL = "accounts:login"
+LOGOUT_REDIRECT_URL = "home"
 
 # ログインページのパス（@login_required などで参照される）
 LOGIN_URL = "accounts:login"
